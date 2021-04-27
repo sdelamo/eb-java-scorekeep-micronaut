@@ -1,5 +1,4 @@
 package scorekeep;
-import com.amazonaws.regions.Regions;
 
 public class TableNames {
   public static final String SESSION_TABLE = "scorekeep-session";

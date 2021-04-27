@@ -1,6 +1,5 @@
 package scorekeep;
 import java.util.*;
-import java.lang.Exception;
 
 public class SessionFactory {
   private final SessionModel model = new SessionModel();

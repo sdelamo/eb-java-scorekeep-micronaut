@@ -2,8 +2,6 @@ package scorekeep;
 
 import java.util.Set;
 import java.util.HashSet;
-
-
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;

@@ -1,6 +1,5 @@
 package scorekeep;
 import java.util.*;
-import java.lang.Exception;
 
 public class GameFactory {
   private final HashMap<String, Game> allGames = new HashMap<String, Game>(1);
