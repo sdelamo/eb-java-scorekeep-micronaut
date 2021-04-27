@@ -10,11 +10,6 @@ import org.slf4j.LoggerFactory;
 public class WebConfig {
   private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
-  @Bean
-  public Filter SimpleCORSFilter() {
-    return new SimpleCORSFilter();
-  }
-
   static {
     if ( System.getenv("NOTIFICATION_EMAIL") != null ){
       try { Sns.createSubscription(); }

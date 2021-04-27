@@ -1,3 +1,13 @@
 micronaut:
   application:
     name: scorekeep
+---
+micronaut:
+  server:
+    cors:
+      enabled: true
+      configurations:
+        all:
+          allowed-methods: "*"
+          allowed-headers: "*"
+          allowed-origins: "http://localhost:8080"
