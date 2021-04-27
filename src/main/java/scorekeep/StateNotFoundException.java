@@ -1,12 +1,12 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="State does not exist.")
-public class StateNotFoundException extends Exception{
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
+
+public class StateNotFoundException extends HttpStatusException {
   private String stateId;
-  public StateNotFoundException(String stateId)
-  {
+  public StateNotFoundException(String stateId) {
+    super(HttpStatus.NOT_FOUND, "State does not exist.");
     this.stateId = stateId;
   } 
   public String getStateId()

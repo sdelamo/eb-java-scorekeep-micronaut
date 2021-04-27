@@ -1,12 +1,11 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Game does not exist.")
-public class GameNotFoundException extends Exception{
+public class GameNotFoundException extends HttpStatusException {
   private String gameId;
-  public GameNotFoundException(String gameId)
-  {
+  public GameNotFoundException(String gameId) {
+    super(HttpStatus.NOT_FOUND, "Game does not exist.");
     this.gameId = gameId;
   } 
   public String getGameId()

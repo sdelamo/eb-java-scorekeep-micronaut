@@ -1,12 +1,11 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
 
-@ResponseStatus(value=HttpStatus.BAD_REQUEST, reason="Rules move invocation failed.")
-public class RulesException extends Exception{
+public class RulesException extends HttpStatusException  {
   private String rulesId;
-  public RulesException(String rulesId)
-  {
+  public RulesException(String rulesId) {
+    super(HttpStatus.BAD_REQUEST, "Rules move invocation failed.");
     this.rulesId = rulesId;
   }
   public String getRulesId()

@@ -1,12 +1,12 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Move does not exist.")
-public class MoveNotFoundException extends Exception{
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
+
+public class MoveNotFoundException extends HttpStatusException {
   private String moveId;
-  public MoveNotFoundException(String moveId)
-  {
+  public MoveNotFoundException(String moveId) {
+    super(HttpStatus.NOT_FOUND, "Move does not exist.");
     this.moveId = moveId;
   } 
   public String getMoveId()

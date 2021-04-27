@@ -1,12 +1,12 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="Session does not exist.")
-public class SessionNotFoundException extends Exception{
+public class SessionNotFoundException extends HttpStatusException  {
   private String sessionId;
   public SessionNotFoundException(String sessionId)
   {
+    super(HttpStatus.NOT_FOUND, "Session does not exist.");
     this.sessionId = sessionId;
   } 
   public String getSessionId()

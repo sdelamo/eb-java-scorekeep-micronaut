@@ -1,12 +1,13 @@
 package scorekeep;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.http.HttpStatus;
 
-@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="User does not exist.")
-public class UserNotFoundException extends Exception {
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.exceptions.HttpStatusException;
+
+public class UserNotFoundException extends HttpStatusException {
   private String userId;
-  public UserNotFoundException(String userId)
-  {
+
+  public UserNotFoundException(String userId) {
+    super(HttpStatus.NOT_FOUND, "User does not exist.");
     this.userId = userId;
   } 
   public String getUserId()
