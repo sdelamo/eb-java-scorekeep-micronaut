@@ -1,16 +1,17 @@
 package scorekeep;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Bean;
-import javax.servlet.Filter;
 
+import io.micronaut.context.event.ApplicationEventListener;
+import io.micronaut.runtime.server.event.ServerStartupEvent;
+import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Configuration
-public class WebConfig {
+@Singleton
+public class WebConfig implements ApplicationEventListener<ServerStartupEvent> {
   private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
-  static {
+  @Override
+  public void onApplicationEvent(ServerStartupEvent event) {
     if ( System.getenv("NOTIFICATION_EMAIL") != null ){
       try { Sns.createSubscription(); }
       catch (Exception e ) {
