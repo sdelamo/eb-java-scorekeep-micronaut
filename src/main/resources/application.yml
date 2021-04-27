@@ -11,3 +11,9 @@ micronaut:
           allowed-methods: "*"
           allowed-headers: "*"
           allowed-origins: "http://localhost:8080"
+---
+micronaut:
+  router:
+    static-resources:
+      frontend:
+        paths: 'classpath:public'
