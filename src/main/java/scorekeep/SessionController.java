@@ -1,52 +1,43 @@
 package scorekeep;
 
-import java.util.HashSet;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
+import io.micronaut.http.annotation.*;
 
-@RestController
-@RequestMapping(value="/api/session")
+import java.util.List;
+
+@Controller(value="/api/session")
 public class SessionController {
   private final SessionFactory sessionFactory = new SessionFactory();
   private final SessionModel model = new SessionModel();
 
   /* POST /session */
-  @RequestMapping(method=RequestMethod.POST)
+  @Post
   public Session newSession() {
     Session session = sessionFactory.newSession();
     return session;
   }
   /* PUT /session/SESSION */
-  @RequestMapping(value="/{sessionId}", method=RequestMethod.PUT)
-  public Session updateSession(@PathVariable String sessionId, @RequestBody Session session) {
+  @Put(value="/{sessionId}")
+  public Session updateSession(@PathVariable String sessionId, @Body Session session) {
     model.saveSession(session);
     return session;
   }
   /* GET /session */
-  @RequestMapping(method=RequestMethod.GET)
+  @Get
   public List<Session> getSessions() {
     return sessionFactory.getSessions();
   }
   /* GET /session/SESSION/ */
-  @RequestMapping(value="/{sessionId}",method=RequestMethod.GET)
+  @Get(value="/{sessionId}")
   public Session getSession(@PathVariable String sessionId) throws SessionNotFoundException {
     return sessionFactory.getSession(sessionId);
   }
   /* DELETE /session/SESSION/ */
-  @RequestMapping(value="/{sessionId}",method=RequestMethod.DELETE)
+  @Delete(value="/{sessionId}")
   public void deleteSession(@PathVariable String sessionId) throws SessionNotFoundException {
     model.deleteSession(sessionId);
   }
   /* PUT /session/SESSION/owner/USER */
-  @RequestMapping(value="/{sessionId}/owner/{ownerId}",method=RequestMethod.PUT)
+  @Put(value="/{sessionId}/owner/{ownerId}")
   public Session setOwner(@PathVariable String sessionId, @PathVariable String ownerId) throws SessionNotFoundException {
     Session session = sessionFactory.getSession(sessionId);
     session.setOwner(ownerId);
@@ -54,7 +45,7 @@ public class SessionController {
     return session;
   }
   /* PUT /session/SESSION/game/GAME */
-  @RequestMapping(value="/{sessionId}/game/{gameId}", method=RequestMethod.PUT)
+  @Put(value="/{sessionId}/game/{gameId}")
   public void setSessionGame(@PathVariable String sessionId, @PathVariable String gameId) throws SessionNotFoundException, GameNotFoundException {
     Session session = sessionFactory.getSession(sessionId);
     session.addGame(gameId);
